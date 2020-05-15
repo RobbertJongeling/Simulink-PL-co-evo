@@ -1,0 +1,9 @@
+
+Example showing incorrect 3-way-merge:
+
+base='3-way-merge-example\base.slx';
+mine='3-way-merge-example\mine.slx';
+theirs='3-way-merge-example\theirs.slx';
+target='\target.slx';
+
+slxmlcomp.slMerge(base, mine, theirs, target); 

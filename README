@@ -1,1 +1,21 @@
-TEST
+Repository for supporting materials for Simulink co-evolution work.
+
+--
+
+sldemo_fuelsys.slx contains the Simulink example that we base our models on.
+
+Models N, N*, N1 are _org, _evo, and _var respectively
+
+--
+
+3-way-merge-example contains the example models used to show the incorrect 3-way-merge.
+
+--
+
+ConQAT_output contains the results of executing the clone analysis on our examples.
+s
+getCloneScript.m contains the script used to convert the output of ConWAT into a list of handles that can be used to convert the clone into a subsystem.
+
+--
+
+The other .m scripts are used for breaking the link to the library subsystems and converting them into separate ones again.
