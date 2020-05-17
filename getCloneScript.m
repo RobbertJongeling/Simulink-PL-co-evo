@@ -1,4 +1,4 @@
-p='C:\Users\rjongeli\Desktop\SimoneTest\ConQAT_output\simulink-analysis_matlab-colorm-file-writer_Clone_0.m';
+p='ConQAT_output\simulink-analysis_matlab-colorm-file-writer_Clone_0.m';
 handles = [];
 
 f = fopen(p, 'r');
@@ -11,7 +11,7 @@ f = fopen(p, 'r');
             line = strrep(line, "set_param", "get_param");
             line = extractBefore(line, "BackgroundColor");
             line = strcat(line,"handle');");
-            
+
             %evaluate line to get handle
             handles = [handles, eval(line)];
         end
