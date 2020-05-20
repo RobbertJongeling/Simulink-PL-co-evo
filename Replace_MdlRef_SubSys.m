@@ -41,7 +41,7 @@ if( ~isempty( mdlRefsHandles ) )   % If the model contains model references
     [~,~,ext]=fileparts(srcFilename);
     dstFilename = [ pwd '\' newTopLevelModel ext ];
     newModelNames = [ newModelNames ; newTopLevelModel ];
-    
+
     % Delete an existing file
     if( exist(  newTopLevelModel , 'file' ) == 4 )
         if( bdIsLoaded( newTopLevelModel ) )
@@ -49,57 +49,57 @@ if( ~isempty( mdlRefsHandles ) )   % If the model contains model references
         end
         delete( dstFilename );
     end
-    
+
     copyfile( srcFilename , dstFilename ,'f' );
-    
+
     bdclose( topLevelModel );   % Close original model
     topLevelModel = newTopLevelModel;
     load_system( topLevelModel );
-    
+
     % The following two lines are necessary because we are using a new
     % model now:
     topLevelModelHandle = get_param( topLevelModel , 'Handle' );
     mdlRefsHandles = find_system( topLevelModelHandle , 'findall' , 'on' , 'blocktype' , 'ModelReference' );
-    
+
     %% Replace Model References with Sub-Systems:
-    
+
     for k = 1 : length( mdlRefsHandles )
         mdlRefName = get_param( mdlRefsHandles(k) , 'ModelName' );
-        
+
         % Recursive searching of nested model references:
         [ newModelNames , changeStatus ] = Replace_MdlRef_SubSys( mdlRefName , newModelNames );
-        
+
         % Use the new referenced model which has gone through the
         % conversion:
         if( changeStatus )
             mdlRefName = [ mdlRefName '_new' ];
         end
-        
+
         % Create a blank subsystem, fill it with the modelref's contents:
         blockPosition = get_param( mdlRefsHandles(k) , 'Position' );
-        
-        ref_block_path = getfullname(mdlRefsHandles);
+
+        ref_block_path = getfullname(mdlRefsHandles(k));
         % ssName = [ topLevelModel '/' mdlRefName '_SS_' num2str(k) ];
         ssName = [ ref_block_path '_SS_' num2str(k) ];
         ssHandle = add_block( 'built-in/SubSystem' , ssName );  % Create empty SubSystem
-        
+
         slcopy_mdl2subsys( mdlRefName , ssName );   % This function copies contents of the referenced model into the SubSystem
-        
+
         delete_block( mdlRefsHandles(k) );
-        
+
         % Setting the SubSystems position to the same position as the
         % referenced model automatically connects the corresponding in and
         % out ports
         set_param( ssHandle , 'Position' , blockPosition );
-        
+
         % Assigning Model Reference Callbacks to the new subsystem:
         Replace_Callbacks( mdlRefName , ssHandle );
-        
+
     end
-    
+
     save_system( topLevelModel );
     changeStatus = true;    % Model has been changed.
-    
+
 else
     changeStatus = false;    % Model did not have any model references, so there were no changes.
 end
