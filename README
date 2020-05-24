@@ -1,4 +1,6 @@
-Repository for supporting materials for Simulink co-evolution work.
+Repository for supporting materials for the MODELS 2020 P&I track submission:
+"co-evolution of Simulink Models in a Model-Based Product Line"
+
 To download a file, right-click and save link as...
 
 --
@@ -14,8 +16,8 @@ Models N, N*, N1 are _org, _evo, and _var respectively
 --
 
 ConQAT_output contains the results of executing the clone analysis on our examples.
-s
-getCloneScript.m contains the script used to convert the output of ConWAT into a list of handles that can be used to convert the clone into a subsystem.
+
+getCloneScript.m contains the script used to convert the output of ConQAT into a list of handles that can be used to convert the clone into a subsystem.
 
 --
 
