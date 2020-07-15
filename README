@@ -5,13 +5,13 @@ To download a file, right-click and save link as...
 
 --
 
-sldemo_fuelsys.slx contains the Simulink example that we base our models on.
-
-Models N, N*, N1 are _org, _evo, and _var respectively
+3-way-merge-example contains the example models used to show the incorrect 3-way-merge of Simulink models (Figure 4 in the paper)
 
 --
 
-3-way-merge-example contains the example models used to show the incorrect 3-way-merge.
+sldemo_fuelsys.slx contains the Simulink example that we base our models on.
+
+Models N, N*, N1 are _org, _evo, and _var respectively (Figures 7, 8, 9 respectively in the paper)
 
 --
 
@@ -22,3 +22,4 @@ getCloneScript.m contains the script used to convert the output of ConQAT into a
 --
 
 The other .m scripts are used for breaking the link to the library subsystems and converting them into separate ones again.
+They are called through the "Replace_MdlRef_SubSys" call in step 4 of the approach.
